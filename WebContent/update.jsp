@@ -17,23 +17,23 @@
 </div>
 <form action='Update' method='post'>
 <div>
-    <label>작성자</label>
+    <label>작성자</label><br>
     <input type='text' name='name' value='${w.name}'><br>
 </div>
 <div>
-    <label>이메일</label>
+    <label>이메일<br></label><br>
     <input type='email' name='email' value='${w.email}'><br>
 </div>
 <div>
-    <label>비밀번호</label>
+    <label>비밀번호<br></label><br>
     <input type='password' name='password' value='${w.password}'><br>
 </div>
 <div>
-    <label>제목</label>
+    <label>제목<br></label><br>
     <input type='text' name='title' value='${w.title}'><br>
 </div>
 <div>
-    <label>본문</label>
+    <label>본문<br></label><br>
     <textarea name='content' value='${w.content}'><br>
 </div>
 <button type="submit">전송</button>

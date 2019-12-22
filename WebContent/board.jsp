@@ -9,35 +9,37 @@
 <title>Board</title>
 </head>
 <body>
-	<h1>Board</h1>
-	<%--table design 출처 : https://seinarin.tistory.com/3?category=452459--%>
-	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<div style="margin:20px">
+	<h1>게시판</h1>
+</div>
+<%--table design 출처 : https://seinarin.tistory.com/3?category=452459--%>
+<div style="margin:20px">
+	<table cellpadding="0" cellspacing="0" border="0">
 	 <tr height="5"><td width="5"></td></tr>
 	  <tr>
-	   <td width="73">번호</td>
-	   <td width="379">제목</td>
-	   <td width="73">작성자</td>
-	   <td width="164">작성일</td>
-	   <td width="58">최근수정시각</td>
+	   <td align="center" width="75">번호</td>
+	   <td align="center" width="400">제목</td>
+	   <td align="center" width="75">작성자</td>
+	   <td align="center" width="100">작성일</td>
+	   <td align="center" width="100">최근수정일</td>
 	  </tr>
 	<%
 	ArrayList<Writing> writings = (ArrayList<Writing>)request.getAttribute("writings");
 	for(Writing w : writings) {
 	%>  
 	 <tr height="25" align="center">
-		<td>&nbsp;</td>
-		<a href='update?no<%=w.getId() %>'><td><%=w.getId() %></td></a>
+		<td align="center"><a href='update?no<%=w.getId() %>'><%=w.getId() %></a></td>
 		<td align="left"><%=w.getTitle() %></td>
 		<td align="center"><%=w.getName() %></td>
 		<td align="center"><%=w.getWriteDate() %></td>
 		<td align="center"><%=w.getModDate() %></td>
-		<a href='delete?'no<%=w.getId() %>'>[del]</a>
-		<td>&nbsp;</td>
+		<td><a href='delete?'no<%=w.getId() %>'>[del]</a></td>
 	 </tr>
 	 <tr height="1" bgcolor="#D2D2D2"><td colspan="6"></td></tr>
 	 <%} %>
 	 <tr height="1" bgcolor="#82B5DF"><td colspan="6" width="752"></td></tr>
-	 </table>
-	<button a href='Write'>Write</a></button>
+	 </table><br>
+	<button onclick='location.href="write.jsp"'>Write</a></button>
+</div>
 </body>
 </html>

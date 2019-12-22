@@ -12,31 +12,35 @@
 <title>Write</title>
 </head>
 <body>
-<div>
-	<h1>새 글</h1>
+<div style="margin:20px">
+	<h1>새 글 작성하기</h1>
 </div>
+<div style="float:left; margin:20px; width:90%">
 <form action='Write' method='post'>
 <div>
-    <label>작성자</label>
-    <input type='text' name='name'><br>
-</div>
+    <label>작성자</label><br>
+    <input type='text' name='name' style="width:200px;">
+</div><br>
 <div>
-    <label>이메일</label>
-    <input type='email' name='email'><br>
-</div>
+    <label>이메일</label><br>
+    <input type='email' name='email' style="width:200px;">
+</div><br>
 <div>
-    <label>비밀번호</label>
-    <input type='password' name='password'><br>
-</div>
+    <label>비밀번호</label><br>
+    <input type='password' name='password' style="width:200px;">
+</div><br>
 <div>
-    <label>제목</label>
-    <input type='text' name='title'><br>
-</div>
+    <label>제목</label><br>
+    <input type='text' name='title' style="width:900px;">
+</div><br>
 <div>
-    <label>본문</label>
-    <textarea name='content'><br>
+    <label>본문</label><br>
+    <textarea name='content' style="width:900px; height:300px"></textarea>
+</div><br>
+<div style="float:left"><button type="submit">등록</button>
 </div>
-<button type="submit">전송</button>
 </form>
+<button style="margin-left:20px" onclick='location.href="board"'>취소</button>
+</div>
 </body>
 </html>

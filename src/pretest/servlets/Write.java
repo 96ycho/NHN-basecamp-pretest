@@ -45,7 +45,7 @@ public class Write extends HttpServlet {
 		String db_url = "jdbc:mysql://localhost/studydb";
 		String u_id = "eunji";
 		String u_pass = "11111";
-		String write_sql = "insert into board(name, email, password, title, text) values(?, ?, ?, ?, ?)";
+		String write_sql = "insert into board(name, email, password, title, content) values(?, ?, ?, ?, ?)";
 		
 		try {
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
@@ -57,6 +57,7 @@ public class Write extends HttpServlet {
 			stmt.setString(4, request.getParameter("title"));
 			stmt.setString(5, request.getParameter("content"));
 			stmt.executeUpdate();
+			response.sendRedirect("board");
 		} catch(Exception e) {
 			throw new ServletException(e);
 		} finally {
