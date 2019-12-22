@@ -9,32 +9,32 @@
  <!-- Bootstrap CSS -->
  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
 
-<title>Write</title>
+<title>Update</title>
 </head>
 <body>
 <div>
-	<h1>새 글</h1>
+	<h1>글 수정</h1>
 </div>
-<form action='Write' method='post'>
+<form action='Update' method='post'>
 <div>
     <label>작성자</label>
-    <input type='text' name='name'><br>
+    <input type='text' name='name' value='${w.name}'><br>
 </div>
 <div>
     <label>이메일</label>
-    <input type='email' name='email'><br>
+    <input type='email' name='email' value='${w.email}'><br>
 </div>
 <div>
     <label>비밀번호</label>
-    <input type='password' name='password'><br>
+    <input type='password' name='password' value='${w.password}'><br>
 </div>
 <div>
     <label>제목</label>
-    <input type='text' name='title'><br>
+    <input type='text' name='title' value='${w.title}'><br>
 </div>
 <div>
     <label>본문</label>
-    <textarea name='content'><br>
+    <textarea name='content' value='${w.content}'><br>
 </div>
 <button type="submit">전송</button>
 </form>
