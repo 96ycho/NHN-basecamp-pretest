@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="vo.Writing" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,18 +20,19 @@
 	 <tr height="5"><td width="5"></td></tr>
 	  <tr>
 	   <td align="center" width="75">번호</td>
-	   <td align="center" width="400">제목</td>
+	   <td align="center" width="500">제목</td>
 	   <td align="center" width="75">작성자</td>
-	   <td align="center" width="100">작성일</td>
-	   <td align="center" width="100">최근수정일</td>
+	   <td align="center" width="200">작성일</td>
+	   <td align="center" width="200">최근수정일</td>
 	  </tr>
+  	<tr height="1" bgcolor="#82B5DF"><td colspan="6" width="752"></td></tr>
 	<%
 	ArrayList<Writing> writings = (ArrayList<Writing>)request.getAttribute("writings");
 	for(Writing w : writings) {
 	%>  
 	 <tr height="25" align="center">
 		<td align="center"><a href='update?no<%=w.getId() %>'><%=w.getId() %></a></td>
-		<td align="left"><%=w.getTitle() %></td>
+		<td align="left" style="padding:5px"><%=w.getTitle() %></td>
 		<td align="center"><%=w.getName() %></td>
 		<td align="center"><%=w.getWriteDate() %></td>
 		<td align="center"><%=w.getModDate() %></td>

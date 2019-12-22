@@ -1,14 +1,15 @@
 package vo;
 
 import java.util.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Writing {
 	protected int id;
 	protected String title;
 	protected String name;
-	protected Date write_date;
-	protected Date mod_date;
+	protected Timestamp write_date;
+	protected Timestamp mod_date;
 	
 	protected String email;
 	protected String password;
@@ -26,11 +27,11 @@ public class Writing {
 		return this.name;
 	}
 	
-	public Date getWriteDate() {
+	public Timestamp getWriteDate() {
 		return this.write_date;
 	}
 	
-	public Date getModDate() {
+	public Timestamp getModDate() {
 		return this.mod_date;
 	}
 	
@@ -49,12 +50,12 @@ public class Writing {
 		return this;
 	}
 	
-	public Writing setWriteDate(Date wDate) {
+	public Writing setWriteDate(Timestamp wDate) {
 		this.write_date = wDate;
 		return this;
 	}
 	
-	public Writing setModDate(Date modDate) {
+	public Writing setModDate(Timestamp modDate) {
 		this.mod_date = modDate;
 		return this;
 	}

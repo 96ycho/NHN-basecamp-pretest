@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -55,7 +56,7 @@ public class Board extends HttpServlet {
 			ArrayList<Writing> writings = new ArrayList<Writing>();
 			while(rs.next()) {
 				Writing w = new Writing();
-				w = w.setId(rs.getInt("id")).setTitle(rs.getString("title")).setName(rs.getString("name")).setWriteDate(rs.getDate("write_date")).setModDate(rs.getDate("mod_date"));
+				w = w.setId(rs.getInt("id")).setTitle(rs.getString("title")).setName(rs.getString("name")).setWriteDate(rs.getTimestamp("write_date")).setModDate(rs.getTimestamp("mod_date"));
 				writings.add(w);
 			}
 			request.setAttribute("writings", writings);
