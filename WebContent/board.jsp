@@ -32,12 +32,11 @@
 	for(Writing w : writings) {
 	%>  
 	 <tr height="25" align="center">
-		<td align="center"><a href="update?no=<%=w.getId() %>"><%=w.getId() %></a></td>
+		<td align="center"><a href="password?id=<%=w.getId() %>"><%=w.getId() %></a></td>
 		<td align="left" style="padding:5px"><%=w.getTitle() %></td>
 		<td align="center"><%=w.getName() %></td>
 		<td align="center"><%=w.getWriteDate() %></td>
 		<td align="center"><%=w.getModDate() %></td>
-		<td><a href="delete?no=<%=w.getId() %>">[del]</a></td>
 	 </tr>
 	 <tr height="1" bgcolor="#D2D2D2"><td colspan="6"></td></tr>
 	 <%} %>

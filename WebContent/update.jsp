@@ -20,7 +20,6 @@
 <form action='Update' method='post'>
 <%
 	Writing w = (Writing) request.getAttribute("writing");
-	request.setAttribute("id", w.getId());
 %> 
 <div>
     <label>글 번호: <%=w.getId() %></label>
@@ -50,7 +49,22 @@
 <div style="float:left"><button type="submit">등록</button>
 </div>
 </form>
+<button style="margin-left:20px" onclick="delfunction(<%=w.getId() %>);">삭제</button>
 <button style="margin-left:20px" onclick='location.href="board"'>취소</button>
 </div>
 </body>
 </html>
+<script>
+	function delfunction(id){		
+		var url = new String("");
+		var s_id = String(id);
+		var res = confirm("글을 삭제하시겠습니까?");
+		if(res){
+			url = "delete?id="; 
+		}else{
+			url = "update?id=";
+		}
+		url = url + s_id;
+		location.href = url;
+	}
+</script>

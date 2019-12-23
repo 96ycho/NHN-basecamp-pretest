@@ -40,7 +40,7 @@ public class Update extends HttpServlet {
 		Connection conn = null; 
 		Statement stmt = null;
 		ResultSet rs = null;
-		String select_sql = "select id, name, email, password, title, content from board where id="+request.getParameter("no");
+		String select_sql = "select id, name, email, password, title, content from board where id="+request.getParameter("id");
 		
 		try {
 			ServletContext sc = this.getServletContext();
