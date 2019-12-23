@@ -1,6 +1,7 @@
 package pretest.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,15 +42,15 @@ public class Board extends HttpServlet {
 		Connection conn = null; 
 		Statement stmt = null;
 		ResultSet rs = null; 
-		
-		String db_url = "jdbc:mysql://localhost/studydb";
-		String u_id = "eunji";
-		String u_pass = "11111";
 		String read_sql = "select id, title, name, write_date, mod_date from board order by id desc";
 		
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			conn = DriverManager.getConnection(db_url, u_id, u_pass);
+			ServletContext sc = this.getServletContext();
+			Class.forName(sc.getInitParameter("driver"));
+			conn = DriverManager.getConnection(
+					sc.getInitParameter("url"), 
+					sc.getInitParameter("user"), 
+					sc.getInitParameter("password"));
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(read_sql);
 			
@@ -56,7 +58,11 @@ public class Board extends HttpServlet {
 			ArrayList<Writing> writings = new ArrayList<Writing>();
 			while(rs.next()) {
 				Writing w = new Writing();
-				w = w.setId(rs.getInt("id")).setTitle(rs.getString("title")).setName(rs.getString("name")).setWriteDate(rs.getTimestamp("write_date")).setModDate(rs.getTimestamp("mod_date"));
+				w = w.setId(rs.getInt("id"))
+						.setTitle(rs.getString("title"))
+						.setName(rs.getString("name"))
+						.setWriteDate(rs.getTimestamp("write_date"))
+						.setModDate(rs.getTimestamp("mod_date"));
 				writings.add(w);
 			}
 			request.setAttribute("writings", writings);

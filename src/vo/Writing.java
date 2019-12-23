@@ -35,6 +35,18 @@ public class Writing {
 		return this.mod_date;
 	}
 	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public String getContent() {
+		return this.content;
+	}
+	
 	public Writing setId(int id) {
 		this.id = id;
 		return this;
@@ -57,6 +69,21 @@ public class Writing {
 	
 	public Writing setModDate(Timestamp modDate) {
 		this.mod_date = modDate;
+		return this;
+	}
+	
+	public Writing setEmail(String email) {
+		this.email = email;
+		return this;
+	}
+	
+	public Writing setPassword(String password) {
+		this.password = password;
+		return this;
+	}
+	
+	public Writing setContent(String content) {
+		this.content = content;
 		return this;
 	}
 }

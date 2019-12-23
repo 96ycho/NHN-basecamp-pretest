@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ page import="vo.Writing" %>
 <%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
@@ -12,31 +13,44 @@
 <title>Update</title>
 </head>
 <body>
-<div>
-	<h1>글 수정</h1>
+<div style="margin:20px">
+	<h1>글 수정하기</h1>
 </div>
+<div style="float:left; margin:20px; width:90%">
 <form action='Update' method='post'>
+<%
+	Writing w = (Writing) request.getAttribute("writing");
+	request.setAttribute("id", w.getId());
+%> 
+<div>
+    <label>글 번호: <%=w.getId() %></label>
+    <input type='hidden' name='id' value='<%=w.getId() %>'>
+</div><br>
+<div>
 <div>
     <label>작성자</label><br>
-    <input type='text' name='name' value='${w.name}'><br>
-</div>
+    <input type='text' name='name' style="width:200px;" value='<%=w.getName() %>'>
+</div><br>
 <div>
-    <label>이메일<br></label><br>
-    <input type='email' name='email' value='${w.email}'><br>
-</div>
+    <label>이메일</label><br>
+    <input type='email' name='email' style="width:200px;" value='<%=w.getEmail() %>'>
+</div><br>
 <div>
-    <label>비밀번호<br></label><br>
-    <input type='password' name='password' value='${w.password}'><br>
-</div>
+    <label>비밀번호</label><br>
+    <input type='password' name='password' style="width:200px;" value='<%=w.getPassword() %>'>
+</div><br>
 <div>
-    <label>제목<br></label><br>
-    <input type='text' name='title' value='${w.title}'><br>
-</div>
+    <label>제목</label><br>
+    <input type='text' name='title' style="width:900px;" value='<%=w.getTitle() %>'>
+</div><br>
 <div>
-    <label>본문<br></label><br>
-    <textarea name='content' value='${w.content}'><br>
+    <label>본문</label><br>
+    <textarea name='content' style="width:900px; height:300px"><%=w.getContent() %></textarea>
+</div><br>
+<div style="float:left"><button type="submit">등록</button>
 </div>
-<button type="submit">전송</button>
 </form>
+<button style="margin-left:20px" onclick='location.href="board"'>취소</button>
+</div>
 </body>
 </html>

@@ -40,7 +40,7 @@
 <div style="float:left"><button type="submit">등록</button>
 </div>
 </form>
-<button style="margin-left:20px" onclick='location.href="board"'>취소</button>
+<button style="margin-left:20px" onclick="location.href='board'">취소</button>
 </div>
 </body>
 </html>

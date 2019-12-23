@@ -3,6 +3,7 @@
 <%@ page import="vo.Writing" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -19,9 +20,9 @@
 	<table cellpadding="0" cellspacing="0" border="0">
 	 <tr height="5"><td width="5"></td></tr>
 	  <tr>
-	   <td align="center" width="75">번호</td>
+	   <td align="center" width="50">번호</td>
 	   <td align="center" width="500">제목</td>
-	   <td align="center" width="75">작성자</td>
+	   <td align="center" width="100">작성자</td>
 	   <td align="center" width="200">작성일</td>
 	   <td align="center" width="200">최근수정일</td>
 	  </tr>
@@ -31,18 +32,18 @@
 	for(Writing w : writings) {
 	%>  
 	 <tr height="25" align="center">
-		<td align="center"><a href='update?no<%=w.getId() %>'><%=w.getId() %></a></td>
+		<td align="center"><a href="update?no=<%=w.getId() %>"><%=w.getId() %></a></td>
 		<td align="left" style="padding:5px"><%=w.getTitle() %></td>
 		<td align="center"><%=w.getName() %></td>
 		<td align="center"><%=w.getWriteDate() %></td>
 		<td align="center"><%=w.getModDate() %></td>
-		<td><a href='delete?'no<%=w.getId() %>'>[del]</a></td>
+		<td><a href="delete?no=<%=w.getId() %>">[del]</a></td>
 	 </tr>
 	 <tr height="1" bgcolor="#D2D2D2"><td colspan="6"></td></tr>
 	 <%} %>
 	 <tr height="1" bgcolor="#82B5DF"><td colspan="6" width="752"></td></tr>
 	 </table><br>
-	<button onclick='location.href="write.jsp"'>Write</a></button>
+	<button onclick="location.href='write.jsp'">Write</a></button>
 </div>
 </body>
 </html>

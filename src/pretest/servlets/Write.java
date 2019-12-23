@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
-
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,17 +40,18 @@ public class Write extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		Connection conn = null; 
 		PreparedStatement stmt = null;
-		String db_url = "jdbc:mysql://localhost/studydb";
-		String u_id = "eunji";
-		String u_pass = "11111";
 		String write_sql = "insert into board(name, email, password, title, content) values(?, ?, ?, ?, ?)";
 		
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-			conn = DriverManager.getConnection(db_url, u_id, u_pass);
+			ServletContext sc = this.getServletContext();
+			Class.forName(sc.getInitParameter("driver"));
+			conn = DriverManager.getConnection(
+					sc.getInitParameter("url"), 
+					sc.getInitParameter("user"), 
+					sc.getInitParameter("password"));
 			stmt = conn.prepareStatement(write_sql);
 			stmt.setString(1, request.getParameter("name"));
 			stmt.setString(2, request.getParameter("email"));
@@ -65,7 +66,6 @@ public class Write extends HttpServlet {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
 			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
-		
 	}
 
 }
