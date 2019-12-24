@@ -56,15 +56,14 @@
 </html>
 <script>
 	function delfunction(id){		
-		var url = new String("");
+		var url = new String("delete?id=");
 		var s_id = String(id);
 		var res = confirm("글을 삭제하시겠습니까?");
 		if(res){
-			url = "delete?id="; 
+			url = url + s_id;
+			location.href = url;
 		}else{
-			url = "update?id=";
+			setTimeout(function(){location.reload();},1);
 		}
-		url = url + s_id;
-		location.href = url;
 	}
 </script>
