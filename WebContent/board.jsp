@@ -8,10 +8,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>Board</title>
 </head>
 <body>
+<% request.setCharacterEncoding("UTF-8"); %>
 <div style="margin:20px">
 	<h1>게시판</h1>
 </div>
@@ -26,23 +27,23 @@
 	   <td align="center" width="200">작성일</td>
 	   <td align="center" width="200">최근수정일</td>
 	  </tr>
-  	<tr height="1" bgcolor="#82B5DF"><td colspan="6" width="752"></td></tr>
+  	<tr height="1" bgcolor="#82B5DF"><td colspan="6" width="750"></td></tr>
 	<%
 	ArrayList<Writing> writings = (ArrayList<Writing>)request.getAttribute("writings");
 	for(Writing w : writings) {
 	%>  
 	 <tr height="25" align="center">
-		<td align="center"><a href="password?id=<%=w.getId() %>"><%=w.getId() %></a></td>
-		<td align="left" style="padding:5px"><%=w.getTitle() %></td>
+		<td align="center"><%=w.getId() %></td>
+		<td align="left" style="padding:5px"><a href="read?id=<%=w.getId() %>"><%=w.getTitle() %></a></td>
 		<td align="center"><%=w.getName() %></td>
 		<td align="center"><%=w.getWriteDate() %></td>
 		<td align="center"><%=w.getModDate() %></td>
 	 </tr>
 	 <tr height="1" bgcolor="#D2D2D2"><td colspan="6"></td></tr>
 	 <%} %>
-	 <tr height="1" bgcolor="#82B5DF"><td colspan="6" width="752"></td></tr>
+	 <tr height="1" bgcolor="#82B5DF"><td colspan="6" width="750"></td></tr>
 	 </table><br>
-	<button onclick="location.href='write.jsp'">Write</a></button>
+	<button onclick="location.href='write.jsp'">Write</button>
 </div>
 </body>
 </html>

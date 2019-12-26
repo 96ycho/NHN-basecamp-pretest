@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -54,6 +53,8 @@ public class Update extends HttpServlet {
 			rs.next();
 			
 			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
+
 			Writing w = new Writing();
 			w = w.setId(rs.getInt("id"))
 					.setTitle(rs.getString("title"))
@@ -79,6 +80,9 @@ public class Update extends HttpServlet {
 		Connection conn = null; 
 		PreparedStatement stmt = null;
 		String write_sql = "update board set name=?, email=?, password=?, title=?, content=? where id=?";
+		
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		try {
 			ServletContext sc = this.getServletContext();

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>Password</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 	</div><br>
 	<div style="float:left"><button type="submit">확인</button></div>
 </form>
-<button style="margin-left:20px" onclick='location.href="board"'>취소</button>
+<button style="margin-left:20px" onclick='location.href="read?id=<%=id %>"'>취소</button>
 </div>
 </body>
 </html>

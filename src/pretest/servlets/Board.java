@@ -1,13 +1,10 @@
 package pretest.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -55,6 +52,8 @@ public class Board extends HttpServlet {
 			rs = stmt.executeQuery(read_sql);
 			
 			response.setContentType("text/html; charset=UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			
 			ArrayList<Writing> writings = new ArrayList<Writing>();
 			while(rs.next()) {
 				Writing w = new Writing();

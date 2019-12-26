@@ -5,14 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 
  <!-- Bootstrap CSS -->
  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
 
 <title>Update</title>
 </head>
+<script>
+	function delfunction(id){		
+		var url = new String("delete?id=");
+		var s_id = String(id);
+		var res = confirm("글을 삭제하시겠습니까?");
+		if(res){
+			url = url + s_id;
+			location.href = url;
+		}else{
+			setTimeout(function(){location.reload();},1);
+		}
+	}
+</script>
 <body>
+<% request.setCharacterEncoding("UTF-8"); %>
 <div style="margin:20px">
 	<h1>글 수정하기</h1>
 </div>
@@ -25,7 +39,6 @@
     <label>글 번호: <%=w.getId() %></label>
     <input type='hidden' name='id' value='<%=w.getId() %>'>
 </div><br>
-<div>
 <div>
     <label>작성자</label><br>
     <input type='text' name='name' style="width:200px;" value='<%=w.getName() %>'>
@@ -46,24 +59,11 @@
     <label>본문</label><br>
     <textarea name='content' style="width:900px; height:300px"><%=w.getContent() %></textarea>
 </div><br>
-<div style="float:left"><button type="submit">등록</button>
+<div style="float:left"><button type="submit" onclick="alert('글이 수정 되었습니다!');">등록</button>
 </div>
 </form>
 <button style="margin-left:20px" onclick="delfunction(<%=w.getId() %>);">삭제</button>
-<button style="margin-left:20px" onclick='location.href="board"'>취소</button>
+<button style="margin-left:20px" onclick='location.href="read?id=<%=w.getId() %>"'>취소</button>
 </div>
 </body>
 </html>
-<script>
-	function delfunction(id){		
-		var url = new String("delete?id=");
-		var s_id = String(id);
-		var res = confirm("글을 삭제하시겠습니까?");
-		if(res){
-			url = url + s_id;
-			location.href = url;
-		}else{
-			setTimeout(function(){location.reload();},1);
-		}
-	}
-</script>

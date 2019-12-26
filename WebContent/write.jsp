@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 
  <!-- Bootstrap CSS -->
  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
@@ -37,7 +37,7 @@
     <label>본문</label><br>
     <textarea name='content' style="width:900px; height:300px"></textarea>
 </div><br>
-<div style="float:left"><button type="submit">등록</button>
+<div style="float:left"><button type="submit" onclick="alert('글이 등록 되었습니다!');">등록</button>
 </div>
 </form>
 <button style="margin-left:20px" onclick="location.href='board'">취소</button>

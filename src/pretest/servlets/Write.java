@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -44,7 +43,10 @@ public class Write extends HttpServlet {
 		Connection conn = null; 
 		PreparedStatement stmt = null;
 		String write_sql = "insert into board(name, email, password, title, content) values(?, ?, ?, ?, ?)";
-		
+
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
 		try {
 			ServletContext sc = this.getServletContext();
 			Class.forName(sc.getInitParameter("driver"));
