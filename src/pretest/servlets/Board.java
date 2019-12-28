@@ -51,8 +51,8 @@ public class Board extends HttpServlet {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(read_sql);
 			
-			response.setContentType("text/html; charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
+			//response.setContentType("text/html; charset=UTF-8");
+			//request.setCharacterEncoding("UTF-8");
 			
 			ArrayList<Writing> writings = new ArrayList<Writing>();
 			while(rs.next()) {

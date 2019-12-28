@@ -17,6 +17,16 @@
   	<param-name>password</param-name>
   	<param-value>11111</param-value>
   </context-param>
+  
+  <filter>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<filter-class>pretest.filters.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CharacterEncodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  	<url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
  
   <servlet>
   	<servlet-name>Board</servlet-name>

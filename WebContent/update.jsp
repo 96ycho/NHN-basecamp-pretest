@@ -24,14 +24,35 @@
 			setTimeout(function(){location.reload();},1);
 		}
 	}
+	function checkform(){
+		if(document.form1.name.value==""){
+			alert("이름을 입력하세요.");
+			form1.email.focus();
+			return false;
+		}else if(document.form1.email.value==""){
+			alert("이메일을 입력하세요.");
+			form1.email.focus();
+			return false;
+		}else if(document.form1.password.value==""){
+			alert("비밀번호를 입력하세요.");
+			form1.password.focus();
+			return false;
+		}else if(document.form1.title.value==""){
+			alert("제목을 입력하세요.");
+			form1.email.focus();
+			return false;
+		}else{
+			alert("글이 등록 되었습니다!");
+			return true;
+		}
+	}
 </script>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
 <div style="margin:20px">
 	<h1>글 수정하기</h1>
 </div>
 <div style="float:left; margin:20px; width:90%">
-<form action='Update' method='post'>
+<form action='Update' method='post' onsubmit='return checkform()'>
 <%
 	Writing w = (Writing) request.getAttribute("writing");
 %> 
@@ -59,7 +80,7 @@
     <label>본문</label><br>
     <textarea name='content' style="width:900px; height:300px"><%=w.getContent() %></textarea>
 </div><br>
-<div style="float:left"><button type="submit" onclick="alert('글이 수정 되었습니다!');">등록</button>
+<div style="float:left"><button type="submit">등록</button>
 </div>
 </form>
 <button style="margin-left:20px" onclick="delfunction(<%=w.getId() %>);">삭제</button>

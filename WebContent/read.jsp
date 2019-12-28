@@ -14,7 +14,6 @@
 </head>
 <body>
 <%
-	request.setCharacterEncoding("UTF-8");
 	Writing w = (Writing) request.getAttribute("writing");
 %> 
 <div style="margin-top:50px; margin-left:20px;">
@@ -37,7 +36,7 @@
 		<td align="left"><pre><%=w.getContent() %></pre></td>
 	</tr>
 </table><br>
-<button style="margin-left:20px" onclick='location.href="password?id=<%=w.getId() %>"'>수정</button>
+<button style="margin-left:20px" onclick='location.href="update?id=<%=w.getId() %>"'>수정</button>
 <button style="margin-left:20px" onclick='location.href="board"'>목록</button>
 </div>
 </body>

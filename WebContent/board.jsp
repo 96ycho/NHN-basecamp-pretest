@@ -12,7 +12,6 @@
 <title>Board</title>
 </head>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
 <div style="margin:20px">
 	<h1>게시판</h1>
 </div>

@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Password
@@ -61,15 +62,15 @@ public class Password extends HttpServlet {
 			rs = stmt.executeQuery(select_sql);
 			rs.next();
 			
-			response.setContentType("text/html; charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
+			//response.setContentType("text/html; charset=UTF-8");
+			//request.setCharacterEncoding("UTF-8");
 
 			String pass = rs.getString("password");
 			String input_pass = request.getParameter("password");
 			
 			if(pass.equals(input_pass)) {
-				//RequestDispatcher rd = request.getRequestDispatcher("/Update");
-				//rd.forward(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("id", request.getParameter("id"));
 				response.sendRedirect("update?id="+request.getParameter("id"));
 			}else {
 				String url = "/pretest/password?id="+request.getParameter("id");

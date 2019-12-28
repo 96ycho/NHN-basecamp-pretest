@@ -81,8 +81,8 @@ public class Update extends HttpServlet {
 		PreparedStatement stmt = null;
 		String write_sql = "update board set name=?, email=?, password=?, title=?, content=? where id=?";
 		
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html; charset=UTF-8");
+		//request.setCharacterEncoding("UTF-8");
 		
 		try {
 			ServletContext sc = this.getServletContext();

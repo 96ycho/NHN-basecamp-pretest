@@ -51,8 +51,8 @@ public class Read extends HttpServlet {
 			rs = stmt.executeQuery(select_sql);
 			rs.next();
 			
-			response.setContentType("text/html; charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
+			//response.setContentType("text/html; charset=UTF-8");
+			//request.setCharacterEncoding("UTF-8");
 
 			Writing w = new Writing();
 			w = w.setId(rs.getInt("id"))
