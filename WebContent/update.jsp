@@ -42,7 +42,7 @@
 			form1.email.focus();
 			return false;
 		}else{
-			alert("글이 수정 되었습니다!");
+			//alert("글이 수정 되었습니다!");
 			return true;
 		}
 	}

@@ -1,6 +1,7 @@
 package pretest.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,8 +72,17 @@ public class Update extends HttpServlet {
 					.setContent(request.getParameter("content"));
 			WritingDao writingDao = new WritingDao();
 			writingDao.setConnection(conn);
-			writingDao.update(w);
-			response.sendRedirect("board");
+			if(writingDao.update(w)==-1) {
+				String url = "update?id="+request.getParameter("id");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('올바른 이메일 형식이 아닙니다.'); location.href='");
+				out.println(url+"'; </script>");
+				out.flush();
+			} else {
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('글이 수정 되었습니다!'); location.href='/pretest/board'; </script>");
+				out.flush();
+			}
 		} catch(Exception e) {
 			throw new ServletException(e);
 		} 

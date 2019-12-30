@@ -47,6 +47,10 @@ public class WritingDao {
 	public int insert(Writing w) throws Exception {
 		PreparedStatement stmt = null;
 		String write_sql = "insert into board(name, email, password, title, content) values(?, ?, ?, ?, ?)";
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+		if(!w.getEmail().matches(emailRegex)) {
+			return -1;
+		}
 		
 		try {
 			stmt = conn.prepareStatement(write_sql);
@@ -127,6 +131,10 @@ public class WritingDao {
 	public int update(Writing w) throws Exception {
 		PreparedStatement stmt = null;
 		String write_sql = "update board set name=?, email=?, password=?, title=?, content=? where id=?";
+		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+		if(!w.getEmail().matches(emailRegex)) {
+			return -1;
+		}
 		
 		try {
 			stmt = conn.prepareStatement(write_sql);

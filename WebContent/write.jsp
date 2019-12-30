@@ -30,7 +30,7 @@
 			form1.title.focus();
 			return false;
 		}else{
-			alert("글이 등록 되었습니다!");
+			//alert("글이 등록 되었습니다!");
 			return true;
 		}
 	}
