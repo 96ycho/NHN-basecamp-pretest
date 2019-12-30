@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.WritingDao;
 import vo.Writing;
 
 /**
@@ -36,35 +37,19 @@ public class Update extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null; 
-		Statement stmt = null;
-		ResultSet rs = null;
-		String select_sql = "select id, name, email, password, title, content from board where id="+request.getParameter("id");
 		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(select_sql);
-			rs.next();
 			
-			response.setContentType("text/html; charset=UTF-8");
-			request.setCharacterEncoding("UTF-8");
-
-			Writing w = new Writing();
-			w = w.setId(rs.getInt("id"))
-					.setTitle(rs.getString("title"))
-					.setName(rs.getString("name"))
-					.setEmail(rs.getString("email"))
-					.setPassword(rs.getString("password"))
-					.setContent(rs.getString("content"));
-			request.setAttribute("writing", w);
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			request.setAttribute("writing", writingDao.getWriting(Integer.parseInt(request.getParameter("id"))));
 			RequestDispatcher rd = request.getRequestDispatcher("/update.jsp");
 			rd.include(request, response);
 		} catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-		}
+		} 
 	}
 
 	/**
@@ -72,29 +57,25 @@ public class Update extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null; 
-		PreparedStatement stmt = null;
-		String write_sql = "update board set name=?, email=?, password=?, title=?, content=? where id=?";
-		
-		//response.setContentType("text/html; charset=UTF-8");
-		//request.setCharacterEncoding("UTF-8");
 		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.prepareStatement(write_sql);
-			stmt.setString(1, request.getParameter("name"));
-			stmt.setString(2, request.getParameter("email"));
-			stmt.setString(3, request.getParameter("password"));
-			stmt.setString(4, request.getParameter("title"));
-			stmt.setString(5, request.getParameter("content"));
-			stmt.setInt(6, Integer.parseInt(request.getParameter("id")));
-			stmt.executeUpdate();
+			
+			Writing w = new Writing();
+			w = w.setId(Integer.parseInt(request.getParameter("id")))
+					.setName(request.getParameter("name"))
+					.setEmail(request.getParameter("email"))
+					.setPassword(request.getParameter("password"))
+					.setTitle(request.getParameter("title"))
+					.setContent(request.getParameter("content"));
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			writingDao.update(w);
 			response.sendRedirect("board");
 		} catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-		}
+		} 
 	}
 
 }

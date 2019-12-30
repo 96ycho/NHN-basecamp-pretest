@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.WritingDao;
+
 /**
  * Servlet implementation class Password
  */
@@ -46,21 +48,14 @@ public class Password extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null; 
-		Statement stmt = null;
-		ResultSet rs = null;
-		String select_sql = "select password from board where id="+request.getParameter("id");
 		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(select_sql);
-			rs.next();
-			
-			//response.setContentType("text/html; charset=UTF-8");
-			//request.setCharacterEncoding("UTF-8");
 
-			String pass = rs.getString("password");
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			String pass = writingDao.getPassword(Integer.parseInt(request.getParameter("id")));
 			String input_pass = request.getParameter("password");
 			
 			if(pass.equals(input_pass)) {
@@ -76,9 +71,7 @@ public class Password extends HttpServlet {
 			}
 		} catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-		}
+		} 
 	}
 
 }

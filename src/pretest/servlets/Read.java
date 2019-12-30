@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.WritingDao;
 import vo.Writing;
 
 /**
@@ -35,30 +36,18 @@ public class Read extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null; 
-		Statement stmt = null;
-		ResultSet rs = null;
-		String select_sql = "select id, name, email, title, content from board where id="+request.getParameter("id");
 		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(select_sql);
-			rs.next();
 			
-			Writing w = new Writing();
-			w = w.setId(rs.getInt("id"))
-					.setTitle(rs.getString("title"))
-					.setName(rs.getString("name"))
-					.setEmail(rs.getString("email"))
-					.setContent(rs.getString("content"));
-			request.setAttribute("writing", w);
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			request.setAttribute("writing", writingDao.getWriting(Integer.parseInt(request.getParameter("id"))));
 			RequestDispatcher rd = request.getRequestDispatcher("/read.jsp");
 			rd.include(request, response);
 		} catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
 		}
 	}
 

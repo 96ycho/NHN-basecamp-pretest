@@ -42,7 +42,7 @@
 			form1.email.focus();
 			return false;
 		}else{
-			alert("글이 등록 되었습니다!");
+			alert("글이 수정 되었습니다!");
 			return true;
 		}
 	}
@@ -52,7 +52,7 @@
 	<h1>글 수정하기</h1>
 </div>
 <div style="float:left; margin:20px; width:90%">
-<form action='Update' method='post' onsubmit='return checkform()'>
+<form name='form1' action='Update' method='post' onsubmit='return checkform()'>
 <%
 	Writing w = (Writing) request.getAttribute("writing");
 %> 

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.WritingDao;
+import vo.Writing;
+
 /**
  * Servlet implementation class Write
  */
@@ -39,28 +42,24 @@ public class Write extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		Connection conn = null; 
-		PreparedStatement stmt = null;
-		String write_sql = "insert into board(name, email, password, title, content) values(?, ?, ?, ?, ?)";
-
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-
+		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.prepareStatement(write_sql);
-			stmt.setString(1, request.getParameter("name"));
-			stmt.setString(2, request.getParameter("email"));
-			stmt.setString(3, request.getParameter("password"));
-			stmt.setString(4, request.getParameter("title"));
-			stmt.setString(5, request.getParameter("content"));
-			stmt.executeUpdate();
+			
+			Writing w = new Writing();
+			w = w.setName(request.getParameter("name"))
+					.setEmail(request.getParameter("email"))
+					.setPassword(request.getParameter("password"))
+					.setTitle(request.getParameter("title"))
+					.setContent(request.getParameter("content"));
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			writingDao.insert(w);
 			response.sendRedirect("board");
 		} catch(Exception e) {
 			throw new ServletException(e);
-		} finally {
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-		}
+		} 
 	}
 
 }

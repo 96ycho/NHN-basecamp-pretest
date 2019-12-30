@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.WritingDao;
 import vo.Writing;
 
 /**
@@ -36,34 +37,21 @@ public class Board extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null; 
-		Statement stmt = null;
 		ResultSet rs = null; 
-		String read_sql = "select id, title, name, write_date, mod_date from board order by id desc";
 		
 		try {
 			ServletContext sc = this.getServletContext();
 			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(read_sql);
 			
-			ArrayList<Writing> writings = new ArrayList<Writing>();
-			while(rs.next()) {
-				Writing w = new Writing();
-				w = w.setId(rs.getInt("id"))
-						.setTitle(rs.getString("title"))
-						.setName(rs.getString("name"))
-						.setWriteDate(rs.getTimestamp("write_date"))
-						.setModDate(rs.getTimestamp("mod_date"));
-				writings.add(w);
-			}
-			request.setAttribute("writings", writings);
+			WritingDao writingDao = new WritingDao();
+			writingDao.setConnection(conn);
+			request.setAttribute("writings", writingDao.getBoard());
 			RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 			rd.include(request, response);
 		} catch(Exception e) {
 			throw new ServletException(e);
 		} finally {
-			try {if (stmt != null) rs.close();} catch(Exception e) {}
-			try {if (stmt != null) stmt.close();} catch(Exception e) {}
+			try {if (rs != null) rs.close();} catch(Exception e) {}
 		}
 	}
 
