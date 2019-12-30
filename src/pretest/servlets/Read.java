@@ -2,7 +2,6 @@ package pretest.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -42,18 +41,11 @@ public class Read extends HttpServlet {
 		
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(
-					sc.getInitParameter("url"), 
-					sc.getInitParameter("user"), 
-					sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(select_sql);
 			rs.next();
 			
-			//response.setContentType("text/html; charset=UTF-8");
-			//request.setCharacterEncoding("UTF-8");
-
 			Writing w = new Writing();
 			w = w.setId(rs.getInt("id"))
 					.setTitle(rs.getString("title"))
@@ -67,7 +59,6 @@ public class Read extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 

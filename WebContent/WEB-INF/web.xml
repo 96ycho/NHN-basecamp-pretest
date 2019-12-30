@@ -27,7 +27,22 @@
   	<url-pattern>/*</url-pattern>
   	<url-pattern>*.jsp</url-pattern>
   </filter-mapping>
+  <filter>
+  	<filter-name>InitSession</filter-name>
+  	<filter-class>pretest.filters.InitSession</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>InitSession</filter-name>
+  	<url-pattern>/board</url-pattern>
+  	<url-pattern>/read</url-pattern>
+  	<url-pattern>/write</url-pattern>
+  </filter-mapping>
  
+ <servlet>
+  	<servlet-name>AppInitServlet</servlet-name>
+  	<servlet-class>pretest.servlets.AppInitServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
   <servlet>
   	<servlet-name>Board</servlet-name>
   	<servlet-class>pretest.servlets.Board</servlet-class>

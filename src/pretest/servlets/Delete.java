@@ -2,7 +2,6 @@ package pretest.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import javax.servlet.ServletContext;
@@ -37,8 +36,7 @@ public class Delete extends HttpServlet {
 		
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(sc.getInitParameter("url"), sc.getInitParameter("user"), sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.prepareStatement(delete_sql);
 			stmt.setInt(1, Integer.parseInt(request.getParameter("id")));
 			stmt.executeUpdate();
@@ -47,7 +45,6 @@ public class Delete extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 

@@ -2,7 +2,6 @@ package pretest.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -43,16 +42,9 @@ public class Board extends HttpServlet {
 		
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(
-					sc.getInitParameter("url"), 
-					sc.getInitParameter("user"), 
-					sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(read_sql);
-			
-			//response.setContentType("text/html; charset=UTF-8");
-			//request.setCharacterEncoding("UTF-8");
 			
 			ArrayList<Writing> writings = new ArrayList<Writing>();
 			while(rs.next()) {
@@ -72,7 +64,6 @@ public class Board extends HttpServlet {
 		} finally {
 			try {if (stmt != null) rs.close();} catch(Exception e) {}
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 

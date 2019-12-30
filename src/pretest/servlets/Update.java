@@ -2,7 +2,6 @@ package pretest.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -43,11 +42,7 @@ public class Update extends HttpServlet {
 		
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(
-					sc.getInitParameter("url"), 
-					sc.getInitParameter("user"), 
-					sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(select_sql);
 			rs.next();
@@ -69,7 +64,6 @@ public class Update extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 
@@ -86,8 +80,7 @@ public class Update extends HttpServlet {
 		
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(sc.getInitParameter("url"), sc.getInitParameter("user"), sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.prepareStatement(write_sql);
 			stmt.setString(1, request.getParameter("name"));
 			stmt.setString(2, request.getParameter("email"));
@@ -101,7 +94,6 @@ public class Update extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 

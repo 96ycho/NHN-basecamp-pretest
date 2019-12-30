@@ -2,7 +2,6 @@ package pretest.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import javax.servlet.ServletContext;
@@ -48,11 +47,7 @@ public class Write extends HttpServlet {
 
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(
-					sc.getInitParameter("url"), 
-					sc.getInitParameter("user"), 
-					sc.getInitParameter("password"));
+			conn = (Connection) sc.getAttribute("conn");
 			stmt = conn.prepareStatement(write_sql);
 			stmt.setString(1, request.getParameter("name"));
 			stmt.setString(2, request.getParameter("email"));
@@ -65,7 +60,6 @@ public class Write extends HttpServlet {
 			throw new ServletException(e);
 		} finally {
 			try {if (stmt != null) stmt.close();} catch(Exception e) {}
-			try {if (stmt != null) conn.close();} catch(Exception e) {}
 		}
 	}
 

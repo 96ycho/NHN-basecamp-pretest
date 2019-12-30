@@ -15,7 +15,7 @@
 	function checkform(){
 		if(document.form1.name.value==""){
 			alert("이름을 입력하세요.");
-			form1.email.focus();
+			form1.name.focus();
 			return false;
 		}else if(document.form1.email.value==""){
 			alert("이메일을 입력하세요.");
@@ -27,7 +27,7 @@
 			return false;
 		}else if(document.form1.title.value==""){
 			alert("제목을 입력하세요.");
-			form1.email.focus();
+			form1.title.focus();
 			return false;
 		}else{
 			alert("글이 등록 되었습니다!");
