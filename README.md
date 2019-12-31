@@ -39,16 +39,21 @@ update 페이지로 넘어가기 전에 비밀번호를 입력 받는다. <br>
 #### Writing
 Variables : id, title, name, email, password, content, write_date, mod_date <br>
 변수들 및 해당 변수들의 get, set method로 구현되어 있다. <br>
+!https://github.com/96ycho/NHN-basecamp-pretest/blob/master/img/WritingVo.png
 
 ### DAO(Data Access Object) Description 
 
 #### MySQL Database
+!https://github.com/96ycho/NHN-basecamp-pretest/blob/master/img/[mysql]desc_board.png
 
 #### WritingDao
-데이터베이스 접속을 위한 Object
-getBoard : 게시글 리스트를 불러오는 method.
-insert : 데이터 추가를 위한 method.
-delete : 데이터 삭제를 위한 method.
-update : 데이터 수정을 위한 method.
-getWriting : 특정 id의 게시글을 불러오는 method.
-getPassword : 특정 id의 게시글의 비밀번호를 불러오는 method.
+데이터베이스 접속을 위한 Object <br>
+getBoard : 게시글 리스트를 불러오는 method. <br>
+insert : 데이터 추가를 위한 method. <br>
+delete : 데이터 삭제를 위한 method. <br>
+update : 데이터 수정을 위한 method. <br>
+getWriting : 특정 id의 게시글을 불러오는 method. <br>
+getPassword : 특정 id의 게시글의 비밀번호를 불러오는 method. <br>
+
+### 전체 구조
+!https://github.com/96ycho/NHN-basecamp-pretest/blob/master/img/pretest.png
